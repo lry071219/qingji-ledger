@@ -1,0 +1,805 @@
+{
+  "generatedAt": "2026-11-01T10:32:29.864Z",
+  "syntheticOnly": true,
+  "baselineDescription": "Tesseract.js 7 Chinese model, old resize-at-most-2x + PSM 6 strategy reproduced with shared bilinear resampling in Node; not a physical device benchmark.",
+  "baseline": {
+    "critical": 18,
+    "merchant": 15,
+    "expected": 40,
+    "detected": 25
+  },
+  "optimized": {
+    "critical": 29,
+    "merchant": 24,
+    "expected": 40,
+    "detected": 36
+  },
+  "results": [
+    {
+      "id": "yahei-regular",
+      "font": "微软雅黑",
+      "size": 22,
+      "baseline": {
+        "critical": 3,
+        "merchant": 3,
+        "expected": 3,
+        "detected": 3
+      },
+      "optimized": {
+        "critical": 3,
+        "merchant": 3,
+        "expected": 3,
+        "detected": 3
+      },
+      "beforeText": "支付宝\n\n账单\n\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00\n",
+      "afterText": "支付宝\n\n账单\n\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+      "beforeConfidence": 87,
+      "afterConfidence": 87,
+      "reviewRequired": true,
+      "warnings": [
+        "不同识别方案对账单数量、金额、日期或收支方向存在分歧，请逐笔核对后入账。"
+      ],
+      "attempts": 4,
+      "treatments": [
+        "按文字高度放大",
+        "灰度与边缘留白"
+      ],
+      "candidates": [
+        {
+          "text": "支付宝\n\n账单\n\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 87,
+          "method": "原始笔画识别",
+          "reference": true
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月3日\n工资 +8500.00",
+          "confidence": 85,
+          "method": "清晰化识别",
+          "reference": false
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 87,
+          "method": "混合字号与分栏识别",
+          "reference": false
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +18500.00",
+          "confidence": 89,
+          "method": "笔画与对比度增强",
+          "reference": false
+        }
+      ]
+    },
+    {
+      "id": "yahei-small-light",
+      "font": "微软雅黑 Light",
+      "size": 12,
+      "baseline": {
+        "critical": 2,
+        "merchant": 1,
+        "expected": 3,
+        "detected": 3
+      },
+      "optimized": {
+        "critical": 2,
+        "merchant": 1,
+        "expected": 3,
+        "detected": 3
+      },
+      "beforeText": "支付宝\n\n账单\n2026年10月31日\n瑞幸斋啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +f8500.00\n",
+      "afterText": "支付宝\n\n账单\n2026年10月31日\n瑞幸斋啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +f8500.00",
+      "beforeConfidence": 80,
+      "afterConfidence": 80,
+      "reviewRequired": true,
+      "warnings": [
+        "不同识别方案对账单数量、金额、日期或收支方向存在分歧，请逐笔核对后入账。"
+      ],
+      "attempts": 4,
+      "treatments": [
+        "按文字高度放大",
+        "对比度增强",
+        "灰度与边缘留白"
+      ],
+      "candidates": [
+        {
+          "text": "支付宝\n\n账单\n2026年10月31日\n瑞幸斋啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +f8500.00",
+          "confidence": 80,
+          "method": "原始笔画识别",
+          "reference": true
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月3日\n瑞幸亢啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +f8500.00",
+          "confidence": 82,
+          "method": "清晰化识别",
+          "reference": false
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月3日\n瑞幸亢啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +f8500.00",
+          "confidence": 82,
+          "method": "混合字号与分栏识别",
+          "reference": false
+        },
+        {
+          "text": "支付宝\n账单\n2026年109月31日\n瑞幸铅啡 -14.99\n地铁出行 -6.09\n2026年10月39日\n工资 +8500.00",
+          "confidence": 73,
+          "method": "笔画与对比度增强",
+          "reference": false
+        }
+      ]
+    },
+    {
+      "id": "yahei-bold",
+      "font": "微软雅黑",
+      "size": 20,
+      "baseline": {
+        "critical": 3,
+        "merchant": 3,
+        "expected": 3,
+        "detected": 3
+      },
+      "optimized": {
+        "critical": 3,
+        "merchant": 3,
+        "expected": 3,
+        "detected": 3
+      },
+      "beforeText": "支付宝\n\n账单\n\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00\n",
+      "afterText": "支付宝\n\n账单\n\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+      "beforeConfidence": 90,
+      "afterConfidence": 90,
+      "reviewRequired": false,
+      "warnings": [],
+      "attempts": 4,
+      "treatments": [
+        "按文字高度放大",
+        "灰度与边缘留白"
+      ],
+      "candidates": [
+        {
+          "text": "支付宝\n\n账单\n\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 90,
+          "method": "原始笔画识别",
+          "reference": true
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 90,
+          "method": "清晰化识别",
+          "reference": false
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 90,
+          "method": "混合字号与分栏识别",
+          "reference": false
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 88,
+          "method": "笔画与对比度增强",
+          "reference": false
+        }
+      ]
+    },
+    {
+      "id": "heiti",
+      "font": "黑体",
+      "size": 19,
+      "baseline": {
+        "critical": 1,
+        "merchant": 1,
+        "expected": 3,
+        "detected": 1
+      },
+      "optimized": {
+        "critical": 3,
+        "merchant": 3,
+        "expected": 3,
+        "detected": 3
+      },
+      "beforeText": "支付宝\n\n账单\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6. 00\n2026年10月30日\n工资 +8500. 00\n",
+      "afterText": "支付宝\n\n账单\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+      "beforeConfidence": 90,
+      "afterConfidence": 90,
+      "reviewRequired": false,
+      "warnings": [],
+      "attempts": 4,
+      "treatments": [
+        "按文字高度放大",
+        "灰度与边缘留白"
+      ],
+      "candidates": [
+        {
+          "text": "支付宝\n\n账单\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 90,
+          "method": "原始笔画识别",
+          "reference": true
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 90,
+          "method": "清晰化识别",
+          "reference": false
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 90,
+          "method": "混合字号与分栏识别",
+          "reference": false
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 90,
+          "method": "笔画与对比度增强",
+          "reference": false
+        }
+      ]
+    },
+    {
+      "id": "songti",
+      "font": "宋体",
+      "size": 19,
+      "baseline": {
+        "critical": 0,
+        "merchant": 0,
+        "expected": 3,
+        "detected": 0
+      },
+      "optimized": {
+        "critical": 3,
+        "merchant": 3,
+        "expected": 3,
+        "detected": 3
+      },
+      "beforeText": "支付宝\n\n账单\n2026年10月31日\n瑞幸咖啡 -14. 90\n地铁出行 -6. 00\n2026年10月30日\n工资 +8500. 00\n",
+      "afterText": "支付宝\n\n账单\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+      "beforeConfidence": 90,
+      "afterConfidence": 90,
+      "reviewRequired": false,
+      "warnings": [],
+      "attempts": 4,
+      "treatments": [
+        "按文字高度放大",
+        "对比度增强",
+        "灰度与边缘留白"
+      ],
+      "candidates": [
+        {
+          "text": "支付宝\n\n账单\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 90,
+          "method": "原始笔画识别",
+          "reference": true
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 85,
+          "method": "清晰化识别",
+          "reference": false
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 88,
+          "method": "混合字号与分栏识别",
+          "reference": false
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 89,
+          "method": "笔画与对比度增强",
+          "reference": false
+        }
+      ]
+    },
+    {
+      "id": "kaiti",
+      "font": "楷体",
+      "size": 18,
+      "baseline": {
+        "critical": 1,
+        "merchant": 0,
+        "expected": 3,
+        "detected": 1
+      },
+      "optimized": {
+        "critical": 2,
+        "merchant": 1,
+        "expected": 3,
+        "detected": 2
+      },
+      "beforeText": "支付宝\n\n账单\n2026年10月31日\n瑞赴吹啡 -14.90\n地铁出行 -6 00\n2026年10月30日\n工资 +8500. 00\n",
+      "afterText": "支付宝\n\n账单\n2026年10月31日\n瑞赴吹啡 -14.90\n地铁出行 -6 00\n2026年10月30日\n工资 +8500.00",
+      "beforeConfidence": 81,
+      "afterConfidence": 81,
+      "reviewRequired": false,
+      "warnings": [],
+      "attempts": 4,
+      "treatments": [
+        "按文字高度放大",
+        "对比度增强",
+        "灰度与边缘留白"
+      ],
+      "candidates": [
+        {
+          "text": "支付宝\n\n账单\n2026年10月31日\n瑞赴吹啡 -14.90\n地铁出行 -6 00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 81,
+          "method": "原始笔画识别",
+          "reference": true
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月31日\n瑞闵吹啡 -14.90\n地铁出行 -4 00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 78,
+          "method": "清晰化识别",
+          "reference": false
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月31日\n瑞闵吹啡 -14.90\n地铁出行 -4 00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 78,
+          "method": "混合字号与分栏识别",
+          "reference": false
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月31日\n瑞站吹啡 -14.90\n地铁出行 -和00\n2026年10月30日\n工和 +8500.00",
+          "confidence": 76,
+          "method": "笔画与对比度增强",
+          "reference": false
+        }
+      ]
+    },
+    {
+      "id": "fangsong-small",
+      "font": "仿宋",
+      "size": 14,
+      "baseline": {
+        "critical": 1,
+        "merchant": 0,
+        "expected": 3,
+        "detected": 1
+      },
+      "optimized": {
+        "critical": 3,
+        "merchant": 1,
+        "expected": 3,
+        "detected": 3
+      },
+      "beforeText": "支付宝\n\n账单\n\n2026年10月31日\n瑞幸咯厘 -14. 90\n人地铁出行 -6.00\n2026年10月30日\n工资 +8500. 00\n",
+      "afterText": "支付宝\n\n账单\n\n2026年10月31日\n瑞幸咯厘 -14.90\n人地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+      "beforeConfidence": 72,
+      "afterConfidence": 72,
+      "reviewRequired": true,
+      "warnings": [
+        "不同识别方案对账单数量、金额、日期或收支方向存在分歧，请逐笔核对后入账。"
+      ],
+      "attempts": 4,
+      "treatments": [
+        "按文字高度放大",
+        "对比度增强",
+        "灰度与边缘留白"
+      ],
+      "candidates": [
+        {
+          "text": "支付宝\n\n账单\n\n2026年10月31日\n瑞幸咯厘 -14.90\n人地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 72,
+          "method": "原始笔画识别",
+          "reference": true
+        },
+        {
+          "text": "支付宝\n同音\n2026年10月31日\n瑞在咖厘 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 71,
+          "method": "清晰化识别",
+          "reference": false
+        },
+        {
+          "text": "支付宝\n同音\n2026年10月31日\n瑞在咖厘 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 72,
+          "method": "混合字号与分栏识别",
+          "reference": false
+        },
+        {
+          "text": "支付宝\n三音\n2026年10月31日\n瑞幸旷天 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 48500.00",
+          "confidence": 71,
+          "method": "笔画与对比度增强",
+          "reference": false
+        }
+      ]
+    },
+    {
+      "id": "xingkai-theme",
+      "font": "华文行楷",
+      "size": 22,
+      "baseline": {
+        "critical": 2,
+        "merchant": 2,
+        "expected": 3,
+        "detected": 2
+      },
+      "optimized": {
+        "critical": 3,
+        "merchant": 2,
+        "expected": 3,
+        "detected": 3
+      },
+      "beforeText": "支付宝\n\n账单\n\n2026年10月31晶\n瑞阐曙呆 -14. 90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00\n",
+      "afterText": "支付宝\n\n账单\n\n2026年10月31晶\n瑞阐曙呆 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+      "beforeConfidence": 67,
+      "afterConfidence": 67,
+      "reviewRequired": true,
+      "warnings": [
+        "不同识别方案对账单数量、金额、日期或收支方向存在分歧，请逐笔核对后入账。"
+      ],
+      "attempts": 4,
+      "treatments": [
+        "按文字高度放大",
+        "对比度增强",
+        "灰度与边缘留白"
+      ],
+      "candidates": [
+        {
+          "text": "支付宝\n\n账单\n\n2026年10月31晶\n瑞阐曙呆 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 67,
+          "method": "原始笔画识别",
+          "reference": true
+        },
+        {
+          "text": "支付宝\n巍音\n2026年10月31日\n瑞阐咖啡 -14.90\n地铁出行 -6.00\n2026年10朋230日\n工资 +8500.00",
+          "confidence": 69,
+          "method": "清晰化识别",
+          "reference": false
+        },
+        {
+          "text": "支付宝\n巍音\n2026年10朋31日\n瑞阐加只 -14.90\n地铁出行 -6.00\n2026年10月50晶\n工资 +8500.00",
+          "confidence": 64,
+          "method": "混合字号与分栏识别",
+          "reference": false
+        },
+        {
+          "text": "支付冤\n账单\n2026年10崩21日\n瑞幸加唱 -1490\n地铁愉行 -6.00\n2026年0员30日\n工泪十8500.00",
+          "confidence": 47,
+          "method": "笔画与对比度增强",
+          "reference": false
+        }
+      ]
+    },
+    {
+      "id": "caiyun-outline",
+      "font": "华文彩云",
+      "size": 22,
+      "baseline": {
+        "critical": 0,
+        "merchant": 0,
+        "expected": 3,
+        "detected": 2
+      },
+      "optimized": {
+        "critical": 0,
+        "merchant": 0,
+        "expected": 3,
+        "detected": 2
+      },
+      "beforeText": "支付家\n\n几单\n\n2000年10月530\n殊幸啡-14.90\n地铁出行忆-00\n2000年10月30四\n工资 89500.00\n",
+      "afterText": "支仁家\n2000年10月50上日\n歼寺册啡-014.90\n地轶出行风.00\n29000年10月30日\n工资上89500.00",
+      "beforeConfidence": 44,
+      "afterConfidence": 50,
+      "reviewRequired": true,
+      "warnings": [
+        "不同识别方案对账单数量、金额、日期或收支方向存在分歧，请逐笔核对后入账。",
+        "主题字体或图片清晰度导致识别可信度偏低，请核对原图，尤其是小数点和正负号。"
+      ],
+      "attempts": 4,
+      "treatments": [
+        "按文字高度放大",
+        "对比度增强",
+        "灰度与边缘留白"
+      ],
+      "candidates": [
+        {
+          "text": "支付家\n\n几单\n\n2000年10月530\n殊幸啡-14.90\n地铁出行忆-00\n2000年10月30四\n工资 89500.00",
+          "confidence": 44,
+          "method": "原始笔画识别",
+          "reference": true
+        },
+        {
+          "text": "芭付宝\n2000年10月50上日\n穆幸咖啡-14.90\n地铁出行-00\n2000年10月50日\n工资 38500.00",
+          "confidence": 55,
+          "method": "清晰化识别",
+          "reference": false
+        },
+        {
+          "text": "支仁家\n2000年10月50上日\n歼寺册啡-014.90\n地轶出行风.00\n29000年10月30日\n工资上89500.00",
+          "confidence": 50,
+          "method": "混合字号与分栏识别",
+          "reference": false
+        },
+        {
+          "text": "支们室\n2090年10月50日\n珠幸响嘻-004.90\n地铁出行必-00\n2090年10月30日\n王赛 38500.00",
+          "confidence": 49,
+          "method": "笔画与对比度增强",
+          "reference": false
+        }
+      ]
+    },
+    {
+      "id": "dark-theme",
+      "font": "楷体",
+      "size": 17,
+      "baseline": {
+        "critical": 1,
+        "merchant": 1,
+        "expected": 3,
+        "detected": 1
+      },
+      "optimized": {
+        "critical": 3,
+        "merchant": 3,
+        "expected": 3,
+        "detected": 3
+      },
+      "beforeText": "支付宝\n\n账单\n\n2026年10月31日\n\n瑞幸咖啡 -14.90\n地铁出行 -6. 00\n2026年10月30日\n\n工资 +8500. 00\n",
+      "afterText": "支付宝\n\n账单\n\n2026年10月31日\n\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n\n工资 +8500.00",
+      "beforeConfidence": 86,
+      "afterConfidence": 86,
+      "reviewRequired": true,
+      "warnings": [
+        "不同识别方案对账单数量、金额、日期或收支方向存在分歧，请逐笔核对后入账。"
+      ],
+      "attempts": 4,
+      "treatments": [
+        "深色背景转浅色",
+        "按文字高度放大",
+        "对比度增强",
+        "灰度与边缘留白"
+      ],
+      "candidates": [
+        {
+          "text": "支付宝\n\n账单\n\n2026年10月31日\n\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n\n工资 +8500.00",
+          "confidence": 86,
+          "method": "原始笔画识别",
+          "reference": true
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -0.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 84,
+          "method": "清晰化识别",
+          "reference": false
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月31日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 85,
+          "method": "混合字号与分栏识别",
+          "reference": false
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月31日\n瑞培咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +500.00",
+          "confidence": 84,
+          "method": "笔画与对比度增强",
+          "reference": false
+        }
+      ]
+    },
+    {
+      "id": "low-contrast",
+      "font": "微软雅黑 Light",
+      "size": 16,
+      "baseline": {
+        "critical": 1,
+        "merchant": 1,
+        "expected": 3,
+        "detected": 3
+      },
+      "optimized": {
+        "critical": 1,
+        "merchant": 1,
+        "expected": 3,
+        "detected": 3
+      },
+      "beforeText": "支付宝\n\n账单\n2026年10月3日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00\n",
+      "afterText": "支付宝\n\n账单\n2026年10月3日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+      "beforeConfidence": 86,
+      "afterConfidence": 86,
+      "reviewRequired": true,
+      "warnings": [
+        "不同识别方案对账单数量、金额、日期或收支方向存在分歧，请逐笔核对后入账。"
+      ],
+      "attempts": 4,
+      "treatments": [
+        "按文字高度放大",
+        "对比度增强",
+        "灰度与边缘留白"
+      ],
+      "candidates": [
+        {
+          "text": "支付宝\n\n账单\n2026年10月3日\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 86,
+          "method": "原始笔画识别",
+          "reference": true
+        },
+        {
+          "text": "",
+          "confidence": 0,
+          "method": "清晰化识别",
+          "reference": false
+        },
+        {
+          "text": "",
+          "confidence": 0,
+          "method": "混合字号与分栏识别",
+          "reference": false
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月34昌\n瑞幸咖啡 -14.90\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00",
+          "confidence": 81,
+          "method": "笔画与对比度增强",
+          "reference": false
+        }
+      ]
+    },
+    {
+      "id": "mixed-size-detail",
+      "font": "微软雅黑",
+      "size": 17,
+      "baseline": {
+        "critical": 1,
+        "merchant": 1,
+        "expected": 1,
+        "detected": 1
+      },
+      "optimized": {
+        "critical": 1,
+        "merchant": 1,
+        "expected": 1,
+        "detected": 1
+      },
+      "beforeText": "微信支付\n\n账单详情\n\n瑞幸咖啡\n\n-14.90\n\n支付成功\n\n商品说明: 瑞幸咖啡\n\n支付时间: 2026年10月31日 08:30\n支付方式: 零钱\n",
+      "afterText": "微信支付\n\n账单详情\n\n瑞幸咖啡\n\n-14.90\n\n支付成功\n\n商品说明: 瑞幸咖啡\n\n支付时间: 2026年10月31日 08:30\n支付方式: 零钱",
+      "beforeConfidence": 88,
+      "afterConfidence": 88,
+      "reviewRequired": false,
+      "warnings": [],
+      "attempts": 4,
+      "treatments": [
+        "按文字高度放大",
+        "灰度与边缘留白"
+      ],
+      "candidates": [
+        {
+          "text": "微信支付\n\n账单详情\n\n瑞幸咖啡\n\n-14.90\n\n支付成功\n\n商品说明: 瑞幸咖啡\n\n支付时间: 2026年10月31日 08:30\n支付方式: 零钱",
+          "confidence": 88,
+          "method": "原始笔画识别",
+          "reference": true
+        },
+        {
+          "text": "微信支付\n账单详情\n玉幸咖啡\n-14.90\n支付成功\n商品说明: 瑞幸咖啡\n支付时间: 2026年10月31日 08:30\n支付方式: 夫钱",
+          "confidence": 79,
+          "method": "清晰化识别",
+          "reference": false
+        },
+        {
+          "text": "微信支付\n账单详情\n瑞幸咖啡\n-14.90\n支付成功\n商品说明: 瑞幸咖啡\n支付时间: 2026年10月31日 08:30\n支付方式: 夫钱",
+          "confidence": 86,
+          "method": "混合字号与分栏识别",
+          "reference": false
+        },
+        {
+          "text": "微信支付\n账单详情\n瑞幸咖啡\n-14.90\n支付成功\n商品说明: 瑞幸咖啡\n支付时间: 2026年10月31日 08:30\n支付方式: 零钱",
+          "confidence": 88,
+          "method": "笔画与对比度增强",
+          "reference": false
+        }
+      ]
+    },
+    {
+      "id": "two-column-list",
+      "font": "华文楷体",
+      "size": 18,
+      "baseline": {
+        "critical": 2,
+        "merchant": 2,
+        "expected": 3,
+        "detected": 3
+      },
+      "optimized": {
+        "critical": 2,
+        "merchant": 2,
+        "expected": 3,
+        "detected": 3
+      },
+      "beforeText": "支付宝\n\n账单\n\n2026年10月31日\n\n瑞幸咖啡                                                                                                             -14.90\n地铁出行                                                                                              -6.00\n2026年10月30日\n\n工资                                                                                                                十8500.00\n",
+      "afterText": "支付宝\n\n账单\n\n2026年10月31日\n\n瑞幸咖啡                                                                                                             -14.90\n地铁出行                                                                                              -6.00\n2026年10月30日\n\n工资十8500.00",
+      "beforeConfidence": 88,
+      "afterConfidence": 88,
+      "reviewRequired": true,
+      "warnings": [
+        "不同识别方案对账单数量、金额、日期或收支方向存在分歧，请逐笔核对后入账。"
+      ],
+      "attempts": 4,
+      "treatments": [
+        "按文字高度放大",
+        "对比度增强",
+        "灰度与边缘留白"
+      ],
+      "candidates": [
+        {
+          "text": "支付宝\n\n账单\n\n2026年10月31日\n\n瑞幸咖啡                                                                                                             -14.90\n地铁出行                                                                                              -6.00\n2026年10月30日\n\n工资十8500.00",
+          "confidence": 88,
+          "method": "原始笔画识别",
+          "reference": true
+        },
+        {
+          "text": "支付宝\n账单\n2026年10月31日\n现幸咖啡                    -14.90\n地铁出行                   600\n2026年10月30日\n工资十8500.00",
+          "confidence": 78,
+          "method": "清晰化识别",
+          "reference": false
+        },
+        {
+          "text": "支付宝\n账半\n2026年10月31日\n-14.90\n瑞幸娩啡\n地铁出行 -0.00\n2026年10月30日\n十8500.00\n工资",
+          "confidence": 80,
+          "method": "混合字号与分栏识别",
+          "reference": false
+        },
+        {
+          "text": "支付宝\n账半\n2026年10月31晶\n现考员啡                   -1490\n地詹出行                   600\n2026年10月30晶\n工次                                                          +8500.00",
+          "confidence": 69,
+          "method": "笔画与对比度增强",
+          "reference": false
+        }
+      ]
+    },
+    {
+      "id": "compressed-theme",
+      "font": "楷体",
+      "size": 15,
+      "baseline": {
+        "critical": 0,
+        "merchant": 0,
+        "expected": 3,
+        "detected": 1
+      },
+      "optimized": {
+        "critical": 0,
+        "merchant": 0,
+        "expected": 3,
+        "detected": 1
+      },
+      "beforeText": "支付宝\n\n叱瘦\n\n20D26年10月引 日\n瑞幸如啡 -14.30\n地的出行 -入0D\n20D26年10月30上日\n工资 +850D,DD\n",
+      "afterText": "支付宝\n\n叱瘦\n\n20D26年10月引日\n瑞幸如啡 -14.30\n地的出行 -入0D\n20D26年10月30上日\n工资 +850D,DD",
+      "beforeConfidence": 50,
+      "afterConfidence": 50,
+      "reviewRequired": true,
+      "warnings": [
+        "主题字体或图片清晰度导致识别可信度偏低，请核对原图，尤其是小数点和正负号。"
+      ],
+      "attempts": 4,
+      "treatments": [
+        "按文字高度放大",
+        "对比度增强",
+        "灰度与边缘留白"
+      ],
+      "candidates": [
+        {
+          "text": "支付宝\n\n叱瘦\n\n20D26年10月引日\n瑞幸如啡 -14.30\n地的出行 -入0D\n20D26年10月30上日\n工资 +850D,DD",
+          "confidence": 50,
+          "method": "原始笔画识别",
+          "reference": true
+        },
+        {
+          "text": "村了攻\n医:二;六\n区\n人\n区\n了\n人\n人",
+          "confidence": 13,
+          "method": "清晰化识别",
+          "reference": false
+        },
+        {
+          "text": "过二\n过.团\n和外\nER 八- 本\n本\n有二\n这\n< 三六\n5\nPa 和\n2 AN\n沽\n4",
+          "confidence": 14,
+          "method": "混合字号与分栏识别",
+          "reference": false
+        },
+        {
+          "text": ":疙标晤:\n六",
+          "confidence": 22,
+          "method": "笔画与对比度增强",
+          "reference": false
+        }
+      ]
+    }
+  ]
+}

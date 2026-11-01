@@ -1,0 +1,410 @@
+[
+  {
+    "source": "alipay",
+    "font": "微软雅黑",
+    "id": "yahei-regular",
+    "reference": "2026-11-01",
+    "preview": "yahei-regular.png",
+    "synthetic": true,
+    "file": "yahei-regular.bmp",
+    "fontSizePx": 22,
+    "expected": [
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 1490,
+        "merchant": "瑞幸咖啡"
+      },
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 600,
+        "merchant": "地铁出行"
+      },
+      {
+        "date": "2026-10-30",
+        "type": "income",
+        "amount": 850000,
+        "merchant": "工资"
+      }
+    ]
+  },
+  {
+    "source": "alipay",
+    "font": "微软雅黑 Light",
+    "id": "yahei-small-light",
+    "reference": "2026-11-01",
+    "preview": "yahei-small-light.png",
+    "synthetic": true,
+    "file": "yahei-small-light.bmp",
+    "fontSizePx": 12,
+    "expected": [
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 1490,
+        "merchant": "瑞幸咖啡"
+      },
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 600,
+        "merchant": "地铁出行"
+      },
+      {
+        "date": "2026-10-30",
+        "type": "income",
+        "amount": 850000,
+        "merchant": "工资"
+      }
+    ]
+  },
+  {
+    "source": "alipay",
+    "font": "微软雅黑",
+    "id": "yahei-bold",
+    "reference": "2026-11-01",
+    "preview": "yahei-bold.png",
+    "synthetic": true,
+    "file": "yahei-bold.bmp",
+    "fontSizePx": 20,
+    "expected": [
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 1490,
+        "merchant": "瑞幸咖啡"
+      },
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 600,
+        "merchant": "地铁出行"
+      },
+      {
+        "date": "2026-10-30",
+        "type": "income",
+        "amount": 850000,
+        "merchant": "工资"
+      }
+    ]
+  },
+  {
+    "source": "alipay",
+    "font": "黑体",
+    "id": "heiti",
+    "reference": "2026-11-01",
+    "preview": "heiti.png",
+    "synthetic": true,
+    "file": "heiti.bmp",
+    "fontSizePx": 19,
+    "expected": [
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 1490,
+        "merchant": "瑞幸咖啡"
+      },
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 600,
+        "merchant": "地铁出行"
+      },
+      {
+        "date": "2026-10-30",
+        "type": "income",
+        "amount": 850000,
+        "merchant": "工资"
+      }
+    ]
+  },
+  {
+    "source": "alipay",
+    "font": "宋体",
+    "id": "songti",
+    "reference": "2026-11-01",
+    "preview": "songti.png",
+    "synthetic": true,
+    "file": "songti.bmp",
+    "fontSizePx": 19,
+    "expected": [
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 1490,
+        "merchant": "瑞幸咖啡"
+      },
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 600,
+        "merchant": "地铁出行"
+      },
+      {
+        "date": "2026-10-30",
+        "type": "income",
+        "amount": 850000,
+        "merchant": "工资"
+      }
+    ]
+  },
+  {
+    "source": "alipay",
+    "font": "楷体",
+    "id": "kaiti",
+    "reference": "2026-11-01",
+    "preview": "kaiti.png",
+    "synthetic": true,
+    "file": "kaiti.bmp",
+    "fontSizePx": 18,
+    "expected": [
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 1490,
+        "merchant": "瑞幸咖啡"
+      },
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 600,
+        "merchant": "地铁出行"
+      },
+      {
+        "date": "2026-10-30",
+        "type": "income",
+        "amount": 850000,
+        "merchant": "工资"
+      }
+    ]
+  },
+  {
+    "source": "alipay",
+    "font": "仿宋",
+    "id": "fangsong-small",
+    "reference": "2026-11-01",
+    "preview": "fangsong-small.png",
+    "synthetic": true,
+    "file": "fangsong-small.bmp",
+    "fontSizePx": 14,
+    "expected": [
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 1490,
+        "merchant": "瑞幸咖啡"
+      },
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 600,
+        "merchant": "地铁出行"
+      },
+      {
+        "date": "2026-10-30",
+        "type": "income",
+        "amount": 850000,
+        "merchant": "工资"
+      }
+    ]
+  },
+  {
+    "source": "alipay",
+    "font": "华文行楷",
+    "id": "xingkai-theme",
+    "reference": "2026-11-01",
+    "preview": "xingkai-theme.png",
+    "synthetic": true,
+    "file": "xingkai-theme.bmp",
+    "fontSizePx": 22,
+    "expected": [
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 1490,
+        "merchant": "瑞幸咖啡"
+      },
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 600,
+        "merchant": "地铁出行"
+      },
+      {
+        "date": "2026-10-30",
+        "type": "income",
+        "amount": 850000,
+        "merchant": "工资"
+      }
+    ]
+  },
+  {
+    "source": "alipay",
+    "font": "华文彩云",
+    "id": "caiyun-outline",
+    "reference": "2026-11-01",
+    "preview": "caiyun-outline.png",
+    "synthetic": true,
+    "file": "caiyun-outline.bmp",
+    "fontSizePx": 22,
+    "expected": [
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 1490,
+        "merchant": "瑞幸咖啡"
+      },
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 600,
+        "merchant": "地铁出行"
+      },
+      {
+        "date": "2026-10-30",
+        "type": "income",
+        "amount": 850000,
+        "merchant": "工资"
+      }
+    ]
+  },
+  {
+    "source": "alipay",
+    "font": "楷体",
+    "id": "dark-theme",
+    "reference": "2026-11-01",
+    "preview": "dark-theme.png",
+    "synthetic": true,
+    "file": "dark-theme.bmp",
+    "fontSizePx": 17,
+    "expected": [
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 1490,
+        "merchant": "瑞幸咖啡"
+      },
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 600,
+        "merchant": "地铁出行"
+      },
+      {
+        "date": "2026-10-30",
+        "type": "income",
+        "amount": 850000,
+        "merchant": "工资"
+      }
+    ]
+  },
+  {
+    "source": "alipay",
+    "font": "微软雅黑 Light",
+    "id": "low-contrast",
+    "reference": "2026-11-01",
+    "preview": "low-contrast.png",
+    "synthetic": true,
+    "file": "low-contrast.bmp",
+    "fontSizePx": 16,
+    "expected": [
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 1490,
+        "merchant": "瑞幸咖啡"
+      },
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 600,
+        "merchant": "地铁出行"
+      },
+      {
+        "date": "2026-10-30",
+        "type": "income",
+        "amount": 850000,
+        "merchant": "工资"
+      }
+    ]
+  },
+  {
+    "source": "wechat",
+    "font": "微软雅黑",
+    "id": "mixed-size-detail",
+    "reference": "2026-11-01",
+    "preview": "mixed-size-detail.png",
+    "synthetic": true,
+    "file": "mixed-size-detail.bmp",
+    "fontSizePx": 17,
+    "expected": [
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 1490,
+        "merchant": "瑞幸咖啡"
+      }
+    ]
+  },
+  {
+    "source": "alipay",
+    "font": "华文楷体",
+    "id": "two-column-list",
+    "reference": "2026-11-01",
+    "preview": "two-column-list.png",
+    "synthetic": true,
+    "file": "two-column-list.bmp",
+    "fontSizePx": 18,
+    "expected": [
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 1490,
+        "merchant": "瑞幸咖啡"
+      },
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 600,
+        "merchant": "地铁出行"
+      },
+      {
+        "date": "2026-10-30",
+        "type": "income",
+        "amount": 850000,
+        "merchant": "工资"
+      }
+    ]
+  },
+  {
+    "source": "alipay",
+    "font": "楷体",
+    "id": "compressed-theme",
+    "reference": "2026-11-01",
+    "preview": "compressed-theme.png",
+    "synthetic": true,
+    "file": "compressed-theme.bmp",
+    "fontSizePx": 15,
+    "expected": [
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 1490,
+        "merchant": "瑞幸咖啡"
+      },
+      {
+        "date": "2026-10-31",
+        "type": "expense",
+        "amount": 600,
+        "merchant": "地铁出行"
+      },
+      {
+        "date": "2026-10-30",
+        "type": "income",
+        "amount": 850000,
+        "merchant": "工资"
+      }
+    ]
+  }
+]

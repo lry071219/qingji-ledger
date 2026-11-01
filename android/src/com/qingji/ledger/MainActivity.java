@@ -184,7 +184,7 @@ public final class MainActivity extends Activity {
         @JavascriptInterface public String getDeviceInfo() {
             try {
                 JSONObject data = new JSONObject();
-                data.put("version", "1.1.0"); data.put("android", Build.VERSION.RELEASE);
+                data.put("version", "1.2.0"); data.put("android", Build.VERSION.RELEASE);
                 data.put("abis", new JSONArray(Build.SUPPORTED_ABIS));
                 data.put("supports64Bit", Build.SUPPORTED_64_BIT_ABIS.length > 0);
                 return data.toString();

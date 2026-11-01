@@ -1,3 +1,4 @@
+import {recognizeWithOptimizations} from './ocr-pipeline.js';
 let scriptPromise;
 function loadEngine(){
   if(globalThis.Tesseract)return Promise.resolve();
@@ -8,17 +9,24 @@ function loadEngine(){
   });
   return scriptPromise;
 }
-async function preprocess(file){
+async function decodeImage(file){
   const bitmap=await createImageBitmap(file);
   if(bitmap.width*bitmap.height>40000000){bitmap.close();throw Error('图片尺寸过大，请将长截图分成几张后导入');}
-  const scale=Math.min(2,Math.max(1,1400/bitmap.width),Math.sqrt(12000000/(bitmap.width*bitmap.height)));
-  const canvas=document.createElement('canvas');canvas.width=Math.round(bitmap.width*scale);canvas.height=Math.round(bitmap.height*scale);
+  const canvas=document.createElement('canvas');canvas.width=bitmap.width;canvas.height=bitmap.height;
   const ctx=canvas.getContext('2d',{willReadFrequently:true});ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(bitmap,0,0,canvas.width,canvas.height);bitmap.close();
-  return canvas;
+  const pixels=ctx.getImageData(0,0,canvas.width,canvas.height);canvas.width=0;canvas.height=0;
+  return pixels;
 }
-export async function recognizeImages(files,onProgress=()=>{}){
+function toCanvas({gray,width,height}){
+  const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
+  const ctx=canvas.getContext('2d'),pixels=ctx.createImageData(width,height);
+  for(let i=0;i<gray.length;i++){pixels.data[i*4]=gray[i];pixels.data[i*4+1]=gray[i];pixels.data[i*4+2]=gray[i];pixels.data[i*4+3]=255;}
+  ctx.putImageData(pixels,0,0);
+  return {image:canvas,dispose:()=>{canvas.width=0;canvas.height=0;}};
+}
+export async function recognizeImages(files,onProgress=()=>{},options={}){
   onProgress({index:0,message:'加载中文识别引擎，首次使用可能需要一些时间…'});
-  await loadEngine();let index=0,worker;
+  await loadEngine();let index=0,worker,phase='';
   try{
     worker=await Tesseract.createWorker('chi_sim',1,{
       workerPath:new URL('./vendor/worker.min.js',import.meta.url).href,
@@ -26,14 +34,18 @@ export async function recognizeImages(files,onProgress=()=>{}){
       langPath:new URL('./vendor/lang/',import.meta.url).href,
       logger:m=>{
         const messages={'loading tesseract core':'准备识别核心','initializing tesseract':'初始化识别引擎','loading language traineddata':'加载中文模型','initializing api':'准备识别','recognizing text':'识别账单文字'};
-        onProgress({index,message:`${messages[m.status]||'准备中'} ${Math.round((m.progress||0)*100)}%`});
+        onProgress({index,message:`${m.status==='recognizing text'&&phase?phase:messages[m.status]||'准备中'} ${Math.round((m.progress||0)*100)}%`});
       }
     });
-    await worker.setParameters({preserve_interword_spaces:'1',tessedit_pageseg_mode:'6'});
     const results=[];
     for(index=0;index<files.length;index++){
-      const canvas=await preprocess(files[index]);
-      const {data}=await worker.recognize(canvas);results.push({text:data.text,confidence:data.confidence});canvas.width=0;canvas.height=0;
+      const pixels=await decodeImage(files[index]);
+      const result=await recognizeWithOptimizations(pixels,worker,toCanvas,{
+        profile:options.profile,
+        parseOptions:{reference:options.reference,source:options.source,rules:options.rules},
+        onProgress:progress=>{phase=progress.message;onProgress({index,message:phase});}
+      });
+      results.push(result);
     }
     return results;
   }finally{if(worker)await worker.terminate();}

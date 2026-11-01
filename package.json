@@ -1,6 +1,6 @@
 {
   "name": "qingji-ledger",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "type": "module",
   "description": "轻记：支持本地截图识别的安卓 PWA 记账应用",
@@ -8,7 +8,9 @@
     "dev": "node server.mjs",
     "test": "node --test tests/*.test.mjs",
     "test:ocr": "node tests/ocr-smoke.mjs",
-    "check": "node --check dist/app.js && node --check dist/ledger.js && node --check dist/ocr.js && node --check dist/sw.js && node --check dist/native.js && node --check dist/install.js && node --check dist/privacy.js",
+    "test:ocr-fonts": "node tests/ocr-font-benchmark.mjs",
+    "test:ocr-fixtures": "pwsh -NoProfile -File tests/create-font-fixtures.ps1",
+    "check": "node --check dist/app.js && node --check dist/ledger.js && node --check dist/ocr.js && node --check dist/ocr-image.js && node --check dist/ocr-pipeline.js && node --check dist/sw.js && node --check dist/native.js && node --check dist/install.js && node --check dist/privacy.js",
     "android:build": "pwsh -NoProfile -File android/build.ps1"
   },
   "devDependencies": {

@@ -22,7 +22,7 @@ node android/collect-licenses.mjs
 
 工具由 Adoptium 和 Google 官方源下载，校验 JDK 的 SHA-256 与 Google 元数据中的 SHA-1，放在 `.android-local/tools/`，不更改系统 PATH 或全局 Java。构建采用 aapt2、javac、D8、zipalign 和 apksigner，无需 Gradle / Android Studio。优先使用 Build Tools 37；其下载不可用时，也可使用本机已校验的 Build Tools 36 配合 API 37 的 android.jar 编译本项目；实际工具记录在 release.json。官方工具和项目自有业务代码不一起对外分发。
 
-输出 `dist/downloads/qingji-1.1.0-universal.apk`、SHA-256 文件及 `release.json`。构建必须通过签名验证、APK 对齐、包名 / SDK / 资源检查；发现任何 `lib/` 原生动态库则停止发布，重新审查 ABI。
+输出 `dist/downloads/qingji-1.2.0-universal.apk`、SHA-256 文件及 `release.json`。构建必须通过签名验证、APK 对齐、包名 / SDK / 资源检查；发现任何 `lib/` 原生动态库则停止发布，重新审查 ABI。
 
 正式签名使用 RSA 3072 位，构建请求 APK v1/v2/v3 签名，并验证 Android 7+ 使用的 v2/v3 签名。这里的“正式签名”表示开发者自签名发布密钥，与默认 Android debug 密钥不同，不代表已经过应用商店审核或主体认证。
 

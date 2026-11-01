@@ -7,3 +7,4 @@ tests/ocr-cache/
 android/build/
 android/*.jks
 android/*.keystore
+tests/ocr-fixtures/benchmark-progress.json

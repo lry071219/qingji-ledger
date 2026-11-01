@@ -97,6 +97,8 @@ export function parseBillText(raw, {reference=dateKey(),source:forcedSource,rule
     for(let i=0;i<lines.length;i++) {
       const line=lines[i], found=extractDate(line,reference,yearHint);
       if(found) contextDate=found;
+      // A dotted date header (2026.10.31) is never a decimal amount (10.31).
+      if(found && /^(?:20\d{2}[年./-])?\d{1,2}[月./-]\d{1,2}日?(?:\d{1,2}:\d{2}(?::\d{2})?)?$/.test(line.replace(/\s/g,'')))continue;
       if(/收入.*支出|支出.*收入|合计|总计|小计|共\d+笔/.test(line)) continue;
       const m=line.match(/([+\-¥]?)\s*(\d[\d,]*\.\d{2})(?:\s*元)?(?:\s*(?:收入|支出))?\s*$/);
       if(!m || /\d{1,2}:\d{2}:\d{2}/.test(m[0])) continue;

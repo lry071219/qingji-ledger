@@ -1,23 +1,23 @@
 {
-  "version": "1.1.0",
+  "packageId": "com.qingji.ledger",
+  "builtAt": "2026-11-01T10:34:54.4124803+00:00",
+  "architecture": "universal",
+  "minAndroid": "7.0",
+  "compileSdk": 37,
+  "publicationReady": false,
+  "versionCode": 3,
   "nativeLibraries": 0,
-  "builtAt": "2026-11-01T09:05:19.0386030+00:00",
+  "channel": "release-candidate",
   "targetSdk": 37,
+  "size": 21847852,
+  "buildTools": "build-tools",
+  "minSdk": 24,
+  "version": "1.2.0",
+  "sha256": "d0f86dbb33558d8d0287b5ddcd7c58f7fac57bb67a15a98df0a4b291f164c59d",
+  "supportsArm64": true,
   "pending": [
     "developer identity",
     "support email",
     "physical device acceptance"
-  ],
-  "compileSdk": 37,
-  "versionCode": 2,
-  "buildTools": "build-tools",
-  "minAndroid": "7.0",
-  "supportsArm64": true,
-  "packageId": "com.qingji.ledger",
-  "channel": "release-candidate",
-  "publicationReady": false,
-  "size": 21839519,
-  "minSdk": 24,
-  "architecture": "universal",
-  "sha256": "2c759adad85ea39f0df10f9935ef63976f759958678926cf76499f422246172b"
+  ]
 }

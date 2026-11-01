@@ -1,0 +1,23 @@
+{
+  "version": "1.1.0",
+  "nativeLibraries": 0,
+  "builtAt": "2026-11-01T09:05:19.0386030+00:00",
+  "targetSdk": 37,
+  "pending": [
+    "developer identity",
+    "support email",
+    "physical device acceptance"
+  ],
+  "compileSdk": 37,
+  "versionCode": 2,
+  "buildTools": "build-tools",
+  "minAndroid": "7.0",
+  "supportsArm64": true,
+  "packageId": "com.qingji.ledger",
+  "channel": "release-candidate",
+  "publicationReady": false,
+  "size": 21839519,
+  "minSdk": 24,
+  "architecture": "universal",
+  "sha256": "2c759adad85ea39f0df10f9935ef63976f759958678926cf76499f422246172b"
+}

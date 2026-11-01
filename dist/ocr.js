@@ -25,7 +25,7 @@ export async function recognizeImages(files,onProgress=()=>{}){
       corePath:new URL('./vendor/core/',import.meta.url).href,
       langPath:new URL('./vendor/lang/',import.meta.url).href,
       logger:m=>{
-        const messages={'loading tesseract core':'准备识别核心','initializing tesseract':'初始化识别引擎','loading language traineddata':'下载中文 / 英文模型','initializing api':'准备识别','recognizing text':'识别账单文字'};
+        const messages={'loading tesseract core':'准备识别核心','initializing tesseract':'初始化识别引擎','loading language traineddata':'加载中文模型','initializing api':'准备识别','recognizing text':'识别账单文字'};
         onProgress({index,message:`${messages[m.status]||'准备中'} ${Math.round((m.progress||0)*100)}%`});
       }
     });

@@ -1,6 +1,12 @@
 # 轻记 · 把生活记清楚
 
-适配安卓手机的本地记账 PWA，桌面浏览器也可使用。当前交付为可安装的网页应用，不是微信小程序或原生 APK。
+适配安卓手机的本地记账应用，提供 Android APK 和可安装的网页版 PWA，桌面浏览器也可使用。
+
+Android 1.1.0 发布候选版支持 ARM64（64 位），使用 API 37 SDK 编译并以 Android 17 为目标。开发者主体、客服邮箱仍待定，尚未在用户的小米 17 Pro Max 上实机验收，当前不应描述为已完成商用手续或商店审核。下载站保持所有者私有访问。
+
+APK 下载和安装步骤：https://qingji-ledger-android.rosyivy2.chatgpt.site/install.html
+
+APK 内置中文 OCR 模型，无需登录即可离线使用。网页和 APK 使用独立存储；迁移账本请先从网页版导出 JSON 备份，再在 APK 恢复。构建、签名与商用发布准备见 [android/README.md](android/README.md)。
 
 ## 使用
 

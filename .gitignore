@@ -3,3 +3,7 @@ node_modules/
 *.tar.gz
 *.log
 tests/ocr-cache/
+.android-local/
+android/build/
+android/*.jks
+android/*.keystore

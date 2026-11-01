@@ -102,6 +102,13 @@ export function parseBillText(raw, {reference=dateKey(),source:forcedSource,rule
       if(/收入.*支出|支出.*收入|合计|总计|小计|共\d+笔/.test(line)) continue;
       const m=line.match(/([+\-¥]?)\s*(\d[\d,]*\.\d{2})(?:\s*元)?(?:\s*(?:收入|支出))?\s*$/);
       if(!m || /\d{1,2}:\d{2}:\d{2}/.test(m[0])) continue;
+      // Never silently salvage the numeric suffix of an unreadable money token:
+      // "¥ I4.90" is not 4.90, and "+f8500.00" has an unknown sign/digit.
+      const prefix=line.slice(0,m.index);
+      if(/[+\-¥]\s*[A-Za-z]+\s*$/.test(prefix)||(!m[1]&&!/^\s/.test(m[0])&&/[A-Za-z0-9.,+\-¥]$/.test(prefix))) {
+        warnings.push('有金额包含相似字母、缺失数字或异常符号，未自动提取；请在修正文字后重新解析。');
+        continue;
+      }
       const amount=toCents(m[2]);if(!amount)continue;
       let merchant=line.slice(0,m.index).replace(/20\d{2}[年\-/.]\d{1,2}[月\-/.]\d{1,2}日?|\d{1,2}月\d{1,2}日|\d{1,2}:\d{2}(?::\d{2})?|今天|昨天|前天|收入|支出/g,'').trim();
       if(!merchant || isMeta(merchant)) {

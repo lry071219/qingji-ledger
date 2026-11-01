@@ -1,8 +1,10 @@
+当前 Android 版本为 **1.3.0 ARM64**：内置原生 ML Kit 中文模型、长截图分块、增强核对流程，无互联网权限。签名包下载与元数据见 dist/downloads；构建说明见 android/README.md；验证边界见 OCR-VALIDATION.md。网页版保留原 Tesseract 引擎。
+
 # 轻记 · 把生活记清楚
 
 适配安卓手机的本地记账应用，提供 Android APK 和可安装的网页版 PWA，桌面浏览器也可使用。
 
-Android 1.2.0 发布候选版支持 ARM64（64 位），使用 API 37 SDK 编译并以 Android 17 为目标。开发者主体、客服邮箱仍待定，尚未在用户的小米 17 Pro Max 上实机验收，当前不应描述为已完成商用手续或商店审核。下载站保持所有者私有访问。
+Android 1.3.0 发布候选版支持 ARM64（64 位），使用 API 37 SDK 编译并以 Android 17 为目标。开发者主体、客服邮箱仍待定，尚未在用户的小米 17 Pro Max 上实机验收，当前不应描述为已完成商用手续或商店审核。下载站保持所有者私有访问。
 
 APK 下载和安装步骤：https://qingji-ledger-android.rosyivy2.chatgpt.site/install.html
 

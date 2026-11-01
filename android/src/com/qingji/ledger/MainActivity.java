@@ -35,8 +35,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-/** A Java-only, architecture-neutral Android host. No bundled native .so libraries. */
+/** Local Android host with a bundled ARM64 Chinese OCR model. */
 public final class MainActivity extends Activity {
     private static final String HOST = "appassets.androidplatform.net";
     private static final String ENTRY = "https://" + HOST + "/assets/index.html";
@@ -44,6 +45,9 @@ public final class MainActivity extends Activity {
     private static final int SAVE_FILE = 1002;
     private static final int MAX_EXPORT_BYTES = 25 * 1024 * 1024;
     private final ExecutorService fileExecutor = Executors.newSingleThreadExecutor();
+    private final ExecutorService ocrExecutor = Executors.newSingleThreadExecutor();
+    private final AtomicBoolean recognizing = new AtomicBoolean(false);
+    private volatile boolean destroyed;
     private WebView webView;
     private ValueCallback<Uri[]> fileCallback;
     private byte[] pendingExport;
@@ -100,7 +104,7 @@ public final class MainActivity extends Activity {
             }
             @Override public void onPageFinished(WebView view, String url) {
                 if (isLocal(Uri.parse(url))) view.evaluateJavascript(
-                    "if(!window.HTMLDialogElement||!HTMLDialogElement.prototype.showModal||!window.WebAssembly){alert('请先更新 Android System WebView 或 Chrome，再使用截图识别。');}", null);
+                    "if(!window.HTMLDialogElement||!HTMLDialogElement.prototype.showModal){alert('请先更新 Android System WebView 或 Chrome，再使用截图识别。');}", null);
             }
         });
         ServiceWorkerController.getInstance().setServiceWorkerClient(new ServiceWorkerClient() {
@@ -128,7 +132,7 @@ public final class MainActivity extends Activity {
         });
         if (Build.VERSION.SDK_INT >= 33) getOnBackInvokedDispatcher().registerOnBackInvokedCallback(
             OnBackInvokedDispatcher.PRIORITY_DEFAULT, this::handleBack);
-        boolean accepted = getPreferences(MODE_PRIVATE).getBoolean("privacy-v1", false);
+        boolean accepted = getPreferences(MODE_PRIVATE).getBoolean("privacy-v2", false);
         webView.loadUrl(accepted ? ENTRY : "https://" + HOST + "/assets/privacy.html?first=1");
     }
 
@@ -176,7 +180,7 @@ public final class MainActivity extends Activity {
     private final class LocalFiles {
         @JavascriptInterface public void acceptPrivacy() {
             runOnUiThread(() -> {
-                getPreferences(MODE_PRIVATE).edit().putBoolean("privacy-v1", true).apply();
+                getPreferences(MODE_PRIVATE).edit().putBoolean("privacy-v2", true).apply();
                 webView.loadUrl(ENTRY);
             });
         }
@@ -184,7 +188,8 @@ public final class MainActivity extends Activity {
         @JavascriptInterface public String getDeviceInfo() {
             try {
                 JSONObject data = new JSONObject();
-                data.put("version", "1.2.0"); data.put("android", Build.VERSION.RELEASE);
+                data.put("version", "1.3.0"); data.put("android", Build.VERSION.RELEASE);
+                data.put("ocrEngine", "mlkit-chinese-bundled"); data.put("networkPermission", false);
                 data.put("abis", new JSONArray(Build.SUPPORTED_ABIS));
                 data.put("supports64Bit", Build.SUPPORTED_64_BIT_ABIS.length > 0);
                 return data.toString();
@@ -204,6 +209,25 @@ public final class MainActivity extends Activity {
                 intent.putExtra(Intent.EXTRA_TITLE, safeName);
                 try { startActivityForResult(intent, SAVE_FILE); }
                 catch (ActivityNotFoundException error) { pendingExport = null; notifyUser("系统文件保存器不可用"); }
+            });
+            return true;
+        }
+        @JavascriptInterface public boolean recognizeImage(String requestId, String pngBase64) {
+            if (destroyed || !getPreferences(MODE_PRIVATE).getBoolean("privacy-v2", false) ||
+                    requestId == null || !requestId.matches("ocr[0-9]+") || pngBase64 == null ||
+                    pngBase64.length() > 12 * 1024 * 1024 || !recognizing.compareAndSet(false, true)) return false;
+            ocrExecutor.execute(() -> {
+                JSONObject response;
+                try { response = OfflineTextRecognizer.recognize(getApplicationContext(), pngBase64); }
+                catch (Exception | LinkageError error) {
+                    response = new JSONObject();
+                    try { response.put("error", "本地中文识别未完成，请重试或将长截图分开导入"); } catch (Exception ignored) {}
+                } finally { recognizing.set(false); }
+                final String payload = response.toString();
+                runOnUiThread(() -> {
+                    if (!destroyed) webView.evaluateJavascript("window.__qingjiOcrResult && window.__qingjiOcrResult(" +
+                        JSONObject.quote(requestId) + "," + JSONObject.quote(payload) + ")", null);
+                });
             });
             return true;
         }
@@ -249,9 +273,10 @@ public final class MainActivity extends Activity {
     @Override protected void onPause() { webView.onPause(); super.onPause(); }
     @Override protected void onResume() { super.onResume(); if (webView != null) webView.onResume(); }
     @Override protected void onDestroy() {
+        destroyed = true;
         if (fileCallback != null) fileCallback.onReceiveValue(null);
         pendingExport = null;
         webView.removeJavascriptInterface("QingjiNative"); webView.destroy();
-        fileExecutor.shutdown(); super.onDestroy();
+        fileExecutor.shutdown(); ocrExecutor.shutdownNow(); super.onDestroy();
     }
 }

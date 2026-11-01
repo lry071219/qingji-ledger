@@ -30,7 +30,7 @@ if (!(Test-Path -LiteralPath (Join-Path $ToolsRoot 'jdk/bin/java.exe'))) {
 $repositoryFile = Join-Path (Split-Path -Parent $ToolsRoot) 'repository.xml'
 if (!(Test-Path -LiteralPath $repositoryFile)) {Invoke-WebRequest -Uri 'https://dl.google.com/android/repository/repository2-3.xml' -OutFile $repositoryFile -TimeoutSec 60}
 [xml]$repository = Get-Content -Raw -LiteralPath $repositoryFile
-foreach ($spec in @(@{Id='platforms;android-37.0';Folder='platform-37'},@{Id='build-tools;37.0.0';Folder='build-tools-37'})) {
+foreach ($spec in @(@{Id='platforms;android-37.0';Folder='platform-37'},@{Id='build-tools;36.0.0';Folder='build-tools'},@{Id='platform-tools';Folder='platform-tools'})) {
   $destination = Join-Path $ToolsRoot $spec.Folder
   if (Test-Path -LiteralPath $destination) {continue}
   $package = @($repository.SelectNodes("//*[local-name()='remotePackage']")) | Where-Object {$_.path -eq $spec.Id} | Select-Object -First 1

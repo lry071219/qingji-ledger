@@ -1,4 +1,5 @@
 import {recognizeWithOptimizations} from './ocr-pipeline.js';
+import {hasNativeOcr,recognizeNativeImages} from './ocr-native.js';
 let scriptPromise;
 function loadEngine(){
   if(globalThis.Tesseract)return Promise.resolve();
@@ -25,6 +26,7 @@ function toCanvas({gray,width,height}){
   return {image:canvas,dispose:()=>{canvas.width=0;canvas.height=0;}};
 }
 export async function recognizeImages(files,onProgress=()=>{},options={}){
+  if(hasNativeOcr())return recognizeNativeImages(files,onProgress,options);
   onProgress({index:0,message:'加载中文识别引擎，首次使用可能需要一些时间…'});
   await loadEngine();let index=0,worker,phase='';
   try{

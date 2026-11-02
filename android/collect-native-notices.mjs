@@ -17,7 +17,7 @@ function getLicenses(pom,depth=0){
   if(values.some(v=>!v))return [];
   const file=findPom(path.join(cache,...values))[0];return file?getLicenses(fs.readFileSync(file,'utf8'),depth+1):[];
 }
-const notices=['轻记 Android 1.4.0 — Native OCR dependency notices','',
+const notices=['轻记 Android 1.5.0 — Native OCR dependency notices','',
   'Google ML Kit Chinese 16.0.1 is a bundled on-device SDK, not an open source OCR engine.',
   'ML Kit terms: https://developers.google.com/ml-kit/terms',
   'ML Kit data disclosure: https://developers.google.com/ml-kit/android-data-disclosure',

@@ -1,5 +1,22 @@
 plugins { id 'com.android.application' version '9.1.1' }
 
+def wxProperties = new Properties()
+if (file('wechat.properties').exists()) file('wechat.properties').withInputStream { wxProperties.load(it) }
+def wxAppId = wxProperties.getProperty('appId','').trim()
+def authBase = wxProperties.getProperty('authBaseUrl','').trim().replaceAll('/+$','')
+def wxEnabled = !wxAppId.isEmpty() && !authBase.isEmpty()
+if ((!wxAppId.isEmpty() || !authBase.isEmpty()) && !wxEnabled) throw new GradleException('Configure both appId and authBaseUrl.')
+if (wxEnabled) {
+    def uri = new URI(authBase)
+    if (!(wxAppId ==~ /wx[a-zA-Z0-9]{16}/) || uri.scheme != 'https' || !uri.host || uri.rawUserInfo || uri.rawQuery || uri.rawFragment || (uri.path && uri.path != '/')) throw new GradleException('Use a valid WeChat AppID and a credential-free HTTPS origin.')
+}
+def manifestInput = file('AndroidManifest.xml')
+if (wxEnabled) {
+    manifestInput = file('build/auth-manifest/AndroidManifest.xml')
+    manifestInput.parentFile.mkdirs()
+    manifestInput.text = file('AndroidManifest.xml').getText('UTF-8').replace('android:name="android.permission.INTERNET" tools:node="remove"','android:name="android.permission.INTERNET"')
+}
+
 android {
     namespace 'com.qingji.ledger'
     compileSdk 37
@@ -8,12 +25,15 @@ android {
         applicationId 'com.qingji.ledger'
         minSdk 24
         targetSdk 37
-        versionCode 4
-        versionName '1.3.0'
+        versionCode 5
+        versionName '1.4.0'
+        buildConfigField 'boolean', 'WECHAT_ENABLED', wxEnabled.toString()
+        buildConfigField 'String', 'WECHAT_APP_ID', groovy.json.JsonOutput.toJson(wxAppId)
+        buildConfigField 'String', 'AUTH_BASE_URL', groovy.json.JsonOutput.toJson(authBase)
         ndk { abiFilters 'arm64-v8a' }
     }
     sourceSets.main {
-        manifest.srcFile 'AndroidManifest.xml'
+        manifest.srcFile manifestInput
         java.srcDirs = ['src']
         res.srcDirs = ['res']
         assets.srcDirs = ['assets']
@@ -23,10 +43,12 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     buildTypes.release { minifyEnabled false }
+    buildFeatures { buildConfig = true }
     packaging { jniLibs { useLegacyPackaging = false } }
 }
 
 dependencies {
     // Bundled model: no Play Services model download or cloud OCR.
     implementation 'com.google.mlkit:text-recognition-chinese:16.0.1'
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android:6.8.40'
 }

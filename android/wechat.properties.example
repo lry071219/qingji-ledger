@@ -1,0 +1,5 @@
+# Public configuration only. Copy to android/wechat.properties for a separately
+# prepared network build. The offline APK builder deliberately ignores this file.
+# Never put AppSecret or session tokens in this file or in the APK.
+appId=
+authBaseUrl=

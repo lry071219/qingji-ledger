@@ -132,7 +132,7 @@ public final class MainActivity extends Activity {
         });
         if (Build.VERSION.SDK_INT >= 33) getOnBackInvokedDispatcher().registerOnBackInvokedCallback(
             OnBackInvokedDispatcher.PRIORITY_DEFAULT, this::handleBack);
-        boolean accepted = getPreferences(MODE_PRIVATE).getBoolean("privacy-v2", false);
+        boolean accepted = getPreferences(MODE_PRIVATE).getBoolean("privacy-v3", false);
         webView.loadUrl(accepted ? ENTRY : "https://" + HOST + "/assets/privacy.html?first=1");
     }
 
@@ -178,9 +178,14 @@ public final class MainActivity extends Activity {
     private void notifyUser(String message) { runOnUiThread(() -> Toast.makeText(this, message, Toast.LENGTH_LONG).show()); }
 
     private final class LocalFiles {
+        @JavascriptInterface public String getWechatStatus() { return WechatLogin.status(getApplicationContext()); }
+        @JavascriptInterface public boolean startWechatLogin() {
+            return getPreferences(MODE_PRIVATE).getBoolean("privacy-v3", false) && WechatLogin.start(MainActivity.this);
+        }
+        @JavascriptInterface public void logoutWechat() { WechatLogin.logout(getApplicationContext()); }
         @JavascriptInterface public void acceptPrivacy() {
             runOnUiThread(() -> {
-                getPreferences(MODE_PRIVATE).edit().putBoolean("privacy-v2", true).apply();
+                getPreferences(MODE_PRIVATE).edit().putBoolean("privacy-v3", true).apply();
                 webView.loadUrl(ENTRY);
             });
         }
@@ -188,7 +193,7 @@ public final class MainActivity extends Activity {
         @JavascriptInterface public String getDeviceInfo() {
             try {
                 JSONObject data = new JSONObject();
-                data.put("version", "1.3.0"); data.put("android", Build.VERSION.RELEASE);
+                data.put("version", "1.4.0"); data.put("android", Build.VERSION.RELEASE);
                 data.put("ocrEngine", "mlkit-chinese-bundled"); data.put("networkPermission", false);
                 data.put("abis", new JSONArray(Build.SUPPORTED_ABIS));
                 data.put("supports64Bit", Build.SUPPORTED_64_BIT_ABIS.length > 0);
@@ -213,7 +218,7 @@ public final class MainActivity extends Activity {
             return true;
         }
         @JavascriptInterface public boolean recognizeImage(String requestId, String pngBase64) {
-            if (destroyed || !getPreferences(MODE_PRIVATE).getBoolean("privacy-v2", false) ||
+            if (destroyed || !getPreferences(MODE_PRIVATE).getBoolean("privacy-v3", false) ||
                     requestId == null || !requestId.matches("ocr[0-9]+") || pngBase64 == null ||
                     pngBase64.length() > 12 * 1024 * 1024 || !recognizing.compareAndSet(false, true)) return false;
             ocrExecutor.execute(() -> {

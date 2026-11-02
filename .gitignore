@@ -8,3 +8,6 @@ android/build/
 android/*.jks
 android/*.keystore
 tests/ocr-fixtures/benchmark-progress.json
+auth-server/data/
+auth-server/.env
+android/wechat.properties

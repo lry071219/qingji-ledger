@@ -117,8 +117,8 @@ try {
   }
   $downloadRoot = Join-Path $projectRoot 'dist/downloads'
   New-Item -ItemType Directory -Force -Path $downloadRoot | Out-Null
-  $apk = Join-Path $downloadRoot 'qingji-1.3.0-arm64.apk'
-  Invoke-Checked $java @('-jar',(Join-Path $ToolsRoot "$buildTools/lib/apksigner.jar"),'sign','--ks',$keystore,'--ks-key-alias','qingji','--ks-pass','env:QINGJI_SIGNING_PASSWORD','--key-pass','env:QINGJI_SIGNING_PASSWORD','--v1-signing-enabled','true','--v2-signing-enabled','true','--v3-signing-enabled','true','--out',$apk,$aligned)
+  $apk = Join-Path $downloadRoot 'qingji-1.4.0-arm64.apk'
+  Invoke-Checked $java @('-jar',(Join-Path $ToolsRoot "$buildTools/lib/apksigner.jar"),'sign','--ks',$keystore,'--ks-key-alias','qingji','--ks-pass','env:QINGJI_SIGNING_PASSWORD','--key-pass','env:QINGJI_SIGNING_PASSWORD','--v1-signing-enabled','true','--v2-signing-enabled','true','--v3-signing-enabled','true','--v4-signing-enabled','false','--out',$apk,$aligned)
 } finally {Remove-Item Env:QINGJI_SIGNING_PASSWORD -ErrorAction SilentlyContinue}
 Invoke-Checked $java @('-jar',(Join-Path $ToolsRoot "$buildTools/lib/apksigner.jar"),'verify','--verbose','--print-certs',$apk)
 Invoke-Checked $zipalign @('-c','-P','16','4',$apk)
@@ -143,12 +143,12 @@ try {
   }
   if (!@($archive.Entries | Where-Object {$_.FullName -match 'chinese|ocr.*model'}).Count) {throw 'Bundled Chinese model is missing.'}
   if (@($archive.Entries | Where-Object {$_.FullName.Contains('\') -or $_.FullName -match '(?i)\.jks$|\.keystore$|password\.dpapi|^assets/web/downloads/'}).Count -ne 0) {throw 'APK contains an unsafe asset path or signing/recursive download artifact.'}
-  foreach ($name in @('classes.dex','assets/web/index.html','assets/web/app.js','assets/web/native.js','assets/web/ocr.js','assets/web/ocr-native.js','assets/web/ocr-image.js','assets/web/ocr-pipeline.js','assets/web/privacy.html','assets/web/privacy.js','assets/web/vendor/OPEN-SOURCE-NOTICES.txt')) {
+  foreach ($name in @('classes.dex','assets/web/index.html','assets/web/app.js','assets/web/bill-actions.js','assets/web/display.js','assets/web/wechat.js','assets/web/compact.css','assets/web/native.js','assets/web/ocr.js','assets/web/ocr-native.js','assets/web/ocr-image.js','assets/web/ocr-pipeline.js','assets/web/privacy.html','assets/web/privacy.js','assets/web/vendor/OPEN-SOURCE-NOTICES.txt')) {
     if (!$archive.GetEntry($name)) {throw "APK is missing required file: $name"}
   }
 } finally {$archive.Dispose()}
 $checksum = (Get-FileHash -LiteralPath $apk -Algorithm SHA256).Hash.ToLowerInvariant()
-"$checksum  qingji-1.3.0-arm64.apk" | Set-Content -LiteralPath (Join-Path $downloadRoot 'qingji-1.3.0-arm64.apk.sha256') -Encoding utf8
-@{version='1.3.0';versionCode=4;packageId='com.qingji.ledger';minAndroid='7.0';minSdk=24;targetSdk=37;compileSdk=37;buildTools=$buildTools;architecture='arm64-v8a';supportsArm64=$true;nativeLibraries=$nativeLibraries.Count;ocrEngine='mlkit-chinese-bundled';networkPermission=$false;channel='release-candidate';publicationReady=$false;pending=@('developer identity','support email','physical device acceptance');size=(Get-Item -LiteralPath $apk).Length;sha256=$checksum;builtAt=[DateTimeOffset]::UtcNow.ToString('o')} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $downloadRoot 'release.json') -Encoding utf8
+"$checksum  qingji-1.4.0-arm64.apk" | Set-Content -LiteralPath (Join-Path $downloadRoot 'qingji-1.4.0-arm64.apk.sha256') -Encoding utf8
+@{version='1.4.0';versionCode=5;packageId='com.qingji.ledger';minAndroid='7.0';minSdk=24;targetSdk=37;compileSdk=37;buildTools=$buildTools;architecture='arm64-v8a';supportsArm64=$true;nativeLibraries=$nativeLibraries.Count;ocrEngine='mlkit-chinese-bundled';networkPermission=$false;channel='release-candidate';publicationReady=$false;pending=@('developer identity','support email','physical device acceptance');size=(Get-Item -LiteralPath $apk).Length;sha256=$checksum;builtAt=[DateTimeOffset]::UtcNow.ToString('o')} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $downloadRoot 'release.json') -Encoding utf8
 Write-Output "APK ready: $apk"
 Write-Output "SHA-256: $checksum"

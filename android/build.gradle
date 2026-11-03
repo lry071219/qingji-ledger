@@ -25,8 +25,8 @@ android {
         applicationId 'com.qingji.ledger'
         minSdk 24
         targetSdk 37
-        versionCode 7
-        versionName '1.6.0'
+        versionCode 8
+        versionName '1.6.1'
         buildConfigField 'boolean', 'WECHAT_ENABLED', wxEnabled.toString()
         buildConfigField 'String', 'WECHAT_APP_ID', groovy.json.JsonOutput.toJson(wxAppId)
         buildConfigField 'String', 'AUTH_BASE_URL', groovy.json.JsonOutput.toJson(authBase)

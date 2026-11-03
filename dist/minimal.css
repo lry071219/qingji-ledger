@@ -1,4 +1,4 @@
-:root{--bg:#fff;--white:#fff;--ink:#171717;--muted:#737373;--green:#171717;--light:#f5f5f5;--line:#ebebeb;--expense:#bd3434;--income:#21824b;--radius:10px;color-scheme:light}
+:root{--bg:#fff;--white:#fff;--ink:#171717;--muted:#737373;--green:#171717;--light:#f5f5f5;--line:#ebebeb;--expense:#555;--income:#171717;--radius:10px;color-scheme:light}
 body{background:#fff;color:var(--ink)}.workspace{margin:0 auto;max-width:860px;min-height:100dvh;padding-bottom:calc(90px + env(safe-area-inset-bottom))}.app-header{height:60px;padding:0 28px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.app-name{font-size:calc(20px * var(--ui-scale));font-weight:650;letter-spacing:1px}.local-label{display:flex;gap:5px;align-items:center;color:#8a8a8a;font-size:calc(12px * var(--ui-scale))}.local-label .icon{width:13px;height:13px}
 main{padding:24px 28px 0}.heading{display:flex;align-items:center;justify-content:space-between;margin:0 0 20px;gap:12px}.heading h1{font-size:calc(24px * var(--ui-scale));font-weight:600;letter-spacing:0}.heading>.btn{font-size:calc(13px * var(--ui-scale));padding:9px 13px;min-height:42px;display:flex;align-items:center;gap:5px}.heading>.btn .icon{width:16px;height:16px}.btn{border:1px solid #dedede;background:#fff;color:#222;box-shadow:none}.btn:hover{background:#f5f5f5}.btn.primary{background:#191919;border-color:#191919;color:#fff}.btn.primary:hover{background:#303030}.btn.danger{color:#222;background:#f5f5f5;border-color:#ddd}.icon-button,.text-link{color:#555}.text-link:hover{color:#111}.demo-banner{background:#f7f7f7;color:#777;border:0;font-size:calc(12px * var(--ui-scale));padding:9px 12px;margin-bottom:16px;justify-content:space-between}.demo-banner button{color:#444;font-size:inherit}
 .period-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:nowrap;gap:12px;margin:0}.period-picker{display:flex;align-items:center;gap:4px;flex:0 1 auto;width:auto;min-width:0}.period-picker .icon-button{height:40px;width:32px;min-width:32px;padding:5px;border:0;background:none;flex-shrink:0}.period-picker .icon-button .icon{width:15px;height:15px}.period-picker strong{font-size:calc(16px * var(--ui-scale));font-weight:500;min-width:0;flex:initial;white-space:nowrap;text-align:center}.segmented{display:flex;gap:0;padding:3px;background:#f4f4f4;border:0;border-radius:8px;margin:0;flex-shrink:0}.segmented button{font-size:calc(13px * var(--ui-scale));min-height:34px;min-width:38px;padding:6px 11px;border:0;color:#777;border-radius:6px}.segmented button.active{background:white;color:#111;box-shadow:0 1px 3px #0000000d}
@@ -29,16 +29,16 @@ input,select,textarea{accent-color:#222;border-color:#ddd;color:#222;background:
 .cash-calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;margin-top:10px}
 .cash-weekday{text-align:center;color:#6a6a6a;font-size:calc(11px * var(--ui-scale));padding:4px 0}
 .cash-day{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;min-height:52px;padding:4px 1px;border:1px solid transparent;border-radius:7px;background:#f5f5f5;line-height:1.12}
-.cash-day.income{background:#eff7f1}
-.cash-day.expense{background:#fcf0f0}
 .cash-day.no-records{color:#777;background:#f8f8f8}
 .cash-day span{color:#333;font-size:calc(12px * var(--ui-scale))}
 .cash-day strong{max-width:100%;font-size:calc(11px * var(--ui-scale));font-weight:600;letter-spacing:-.25px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cash-day.income strong,.bill-table .amount.income,.cash-summary .income{font-weight:650}
+.bill-table .amount{display:block;white-space:normal;overflow-wrap:anywhere}
+.amount-direction{display:block;margin-top:2px;color:#626262;font-size:calc(11px * var(--ui-scale))}
 .cash-day[aria-current=date] span{text-decoration:underline;text-underline-offset:2px}
 .cash-day[aria-pressed=true]{border-color:#333}
 #cash-detail{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
 #cash-detail .cash-heading strong{font-size:calc(14px * var(--ui-scale));overflow-wrap:anywhere}
-#cash-detail .amount{white-space:normal;overflow-wrap:anywhere}
 #cash-detail .merchant-name{overflow-wrap:anywhere}
 .cash-day-totals,.cash-empty{margin:8px 0;line-height:1.5}
 .cash-breakdown{list-style:none;margin:0;padding:0}

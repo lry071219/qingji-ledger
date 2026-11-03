@@ -9,3 +9,48 @@ main{padding:24px 28px 0}.heading{display:flex;align-items:center;justify-conten
 input,select,textarea{accent-color:#222;border-color:#ddd;color:#222;background:#fff}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline-color:#777}.type-options button.active{background:#f2f2f2;color:#111;border-color:#aaa}.type-options button.active[data-edit-type=expense]{color:var(--expense)}.type-options button.active[data-edit-type=income]{color:var(--income)}form:has([data-edit-type=expense].active) input[name=amount]{color:var(--expense)}form:has([data-edit-type=income].active) input[name=amount]{color:var(--income)}.review-table [data-review-field=amount]{color:var(--expense)}.review-table tr:has(option[value=income]:checked) [data-review-field=amount]{color:var(--income)}.review-summary,.info-note,.warning-note,.ocr-originals{background:#f6f6f6;color:#666;border-color:#e5e5e5}.review-flag{color:#777}.ocr-progress,.import-tabs button.active{color:#222}.import-tabs button.active{border-color:#222}.drop-zone{border-color:#d5d5d5;background:#fafafa}.drop-zone.dragover{background:#eee;border-color:#777}.drop-zone .scan-big{background:#fff;border-color:#ddd;color:#555}.modal-head h2{color:#222}.modal-head p,.help-copy,.confirm-text,.settings-row p{color:#777}.settings-row>.icon,.privacy-tag{color:#999}.settings-row{border-color:#eee}.btn .icon{color:inherit}#toast{background:#222;left:50%;color:white;box-shadow:none}.busy-spin{color:#555}
 @media(max-width:640px){.app-header{height:49px;padding:0 18px}.app-name{font-size:calc(18px * var(--ui-scale))}.local-label{font-size:calc(11px * var(--ui-scale))}main{padding:22px 18px 0}.heading{margin-bottom:18px}.heading h1{font-size:calc(24px * var(--ui-scale))}.period-bar{gap:8px;flex-wrap:nowrap}.period-picker{width:auto;flex:0 1 auto;gap:2px}.period-picker strong{font-size:calc(14px * var(--ui-scale));min-width:0;flex:initial}.period-picker .icon-button{width:28px;min-width:28px;height:38px}.segmented{margin:0}.segmented button{min-width:34px;padding:6px 10px;min-height:34px;font-size:calc(12px * var(--ui-scale))}.period-summary{gap:12px;padding-top:18px;padding-bottom:20px}.period-summary span{font-size:calc(11px * var(--ui-scale))}.filter-bar{padding-bottom:12px;gap:10px}.batch-toolbar{padding:0 0 8px;gap:8px}.bill-table tr:not(.day-group){grid-template-columns:minmax(0,1fr) 108px}.bill-table.selecting tr:not(.day-group){grid-template-columns:28px minmax(0,1fr) 104px}.transactions .bill-table tr:not(.day-group)>td{padding:14px 0!important}.merchant-name{font-size:calc(14px * var(--ui-scale))}.merchant-note{font-size:calc(11px * var(--ui-scale))}.amount{font-size:calc(15px * var(--ui-scale))}.bill-table.selecting .merchant-name{font-size:calc(14px * var(--ui-scale))}.modal-head{border-bottom:1px solid #eee}.select-all{font-size:calc(11px * var(--ui-scale))}.batch-toolbar .select-all{flex-basis:auto}.batch-toolbar .selection-count{flex:initial;text-align:left}.batch-toolbar .btn.danger{margin-left:0}dialog{border-color:#eee}.mobile-nav{padding-left:12px;padding-right:12px}}
 @media(max-width:360px){main{padding-left:15px;padding-right:15px}.period-picker strong{font-size:calc(13px * var(--ui-scale))}.period-picker .icon-button{width:24px;min-width:24px}.segmented button{padding-left:8px;padding-right:8px;min-width:30px}.period-summary{gap:9px}.batch-toolbar{gap:7px}.batch-toolbar .selection-count{display:none}.bill-table.selecting tr:not(.day-group){grid-template-columns:26px minmax(0,1fr) 96px}.amount{font-size:calc(14px * var(--ui-scale))}}
+
+.header-settings{display:flex;align-items:center;gap:6px;min-height:44px;padding:0 0 0 12px;color:#555;font-size:calc(12px * var(--ui-scale))}
+.header-settings .icon{width:16px;height:16px}
+.stats-today{min-height:42px}
+.cash-summary{display:grid;grid-template-columns:minmax(0,1fr) minmax(108px,auto);align-items:center;gap:16px;margin:16px 0 22px;padding:16px;background:#f7f7f7;border-radius:10px}
+.cash-net,.cash-summary dl{min-width:0}
+.cash-net>span,.cash-summary dt{color:#666;font-size:calc(12px * var(--ui-scale))}
+.cash-net>strong{display:block;margin-top:6px;font-size:calc(clamp(22px,6vw,32px) * var(--ui-scale));font-weight:630;line-height:1.15;overflow-wrap:anywhere}
+.cash-summary dl{margin:0;border-left:1px solid #e1e1e1;padding-left:14px}
+.cash-summary dl>div{display:flex;flex-wrap:wrap;justify-content:space-between;gap:3px 10px}
+.cash-summary dl>div+div{margin-top:5px}
+.cash-summary dd{min-width:0;margin:0;font-size:calc(13px * var(--ui-scale));font-weight:550;overflow-wrap:anywhere}
+.cash-summary,.cash-calendar,#cash-detail,.cash-breakdown,.cash-budget{font-variant-numeric:tabular-nums}
+.cash-section{margin-top:22px}
+.cash-heading{display:flex;justify-content:space-between;align-items:baseline;gap:6px 12px;flex-wrap:wrap}
+.cash-heading h2,.cash-heading h3{margin:0;font-size:calc(16px * var(--ui-scale));font-weight:620}
+.cash-heading>span,.cash-empty,.cash-day-totals,.cash-budget{color:#666;font-size:calc(12px * var(--ui-scale))}
+.cash-calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;margin-top:10px}
+.cash-weekday{text-align:center;color:#6a6a6a;font-size:calc(11px * var(--ui-scale));padding:4px 0}
+.cash-day{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;min-height:52px;padding:4px 1px;border:1px solid transparent;border-radius:7px;background:#f5f5f5;line-height:1.12}
+.cash-day.income{background:#eff7f1}
+.cash-day.expense{background:#fcf0f0}
+.cash-day.no-records{color:#777;background:#f8f8f8}
+.cash-day span{color:#333;font-size:calc(12px * var(--ui-scale))}
+.cash-day strong{max-width:100%;font-size:calc(11px * var(--ui-scale));font-weight:600;letter-spacing:-.25px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cash-day[aria-current=date] span{text-decoration:underline;text-underline-offset:2px}
+.cash-day[aria-pressed=true]{border-color:#333}
+#cash-detail{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+#cash-detail .cash-heading strong{font-size:calc(14px * var(--ui-scale));overflow-wrap:anywhere}
+#cash-detail .amount{white-space:normal;overflow-wrap:anywhere}
+#cash-detail .merchant-name{overflow-wrap:anywhere}
+.cash-day-totals,.cash-empty{margin:8px 0;line-height:1.5}
+.cash-breakdown{list-style:none;margin:0;padding:0}
+.cash-breakdown li{margin:13px 0}
+.cash-breakdown li>div:first-child{display:flex;align-items:baseline;justify-content:space-between;gap:10px;font-size:calc(13px * var(--ui-scale));overflow-wrap:anywhere}
+.cash-breakdown li>div:first-child>span:last-child{text-align:right}
+.cash-breakdown small{color:#666;font-size:inherit}
+.cash-track{height:4px;margin-top:7px;background:#eee;border-radius:4px}
+.cash-track span{display:block;height:100%;border-radius:inherit;background:#777}
+.cash-more{border-top:1px solid var(--line);font-size:calc(13px * var(--ui-scale))}
+.cash-more summary{cursor:pointer;padding:13px 0}
+.cash-more summary span{float:right;color:#666}
+.cash-more .text-link{min-height:44px}
+@media(max-width:640px){.cash-day strong{font-size:clamp(9px,2.5vw,calc(11px * var(--ui-scale)))}}
+@media(max-width:360px){.cash-summary{padding:13px;gap:8px}.cash-summary dl{padding-left:8px}.cash-calendar{gap:3px}.cash-day{min-height:46px}}

@@ -193,7 +193,7 @@ public final class MainActivity extends Activity {
         @JavascriptInterface public String getDeviceInfo() {
             try {
                 JSONObject data = new JSONObject();
-                data.put("version", "1.5.0"); data.put("android", Build.VERSION.RELEASE);
+                data.put("version", "1.6.0"); data.put("android", Build.VERSION.RELEASE);
                 data.put("ocrEngine", "mlkit-chinese-bundled"); data.put("networkPermission", false);
                 data.put("abis", new JSONArray(Build.SUPPORTED_ABIS));
                 data.put("supports64Bit", Build.SUPPORTED_64_BIT_ABIS.length > 0);

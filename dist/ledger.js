@@ -51,6 +51,20 @@ export function inRange(r,range) {return r.date>=range.start && r.date<=range.en
 export function totals(records) {
   return records.reduce((a,r)=>{a[r.type]+=r.amount;return a;},{expense:0,income:0});
 }
+export function dailyCashFlow(records, range) {
+  const days = new Map();
+  const end = parseDay(range.end);
+  for (const day = parseDay(range.start); day <= end; day.setDate(day.getDate() + 1)) {
+    days.set(dateKey(day), {income:0, expense:0, records:[]});
+  }
+  for (const record of records) {
+    const day = days.get(record.date);
+    if (!day) continue;
+    day[record.type] += record.amount;
+    day.records.push(record);
+  }
+  return days;
+}
 function extractDate(line, reference, yearHint) {
   const clean=line.replace(/\s/g,'');
   let m=clean.match(/(20\d{2})[年\-/.](\d{1,2})[月\-/.](\d{1,2})日?/);

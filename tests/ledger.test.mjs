@@ -1,9 +1,21 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {classify,toCents,validDate,rangeFor,shiftAnchor,parseBillText,fingerprint,validateRecord,totals,makeDemo} from '../dist/ledger.js';
+import {classify,toCents,validDate,rangeFor,shiftAnchor,parseBillText,fingerprint,validateRecord,totals,dailyCashFlow,makeDemo} from '../dist/ledger.js';
 test('money uses integer cents and rejects bad input',()=>{assert.equal(toCents('1,234.56'),123456);assert.equal(toCents('0.29'),29);for(const v of ['','0','-0','1.001','1e3','Infinity','abc'])assert.equal(toCents(v),null);});
 test('categories and merchant overrides',()=>{assert.equal(classify('瑞幸咖啡'),'food');assert.equal(classify('滴滴出行'),'transport');assert.equal(classify('京东商城'),'shopping');assert.equal(classify('10月工资','income'),'salary');assert.equal(classify('罗森','expense',[{keyword:'罗森',category:'food'}]),'food');});
 test('calendar uses local days, Monday weeks, leap years and month bounds',()=>{assert.deepEqual(rangeFor('week','2026-11-01'),{start:'2026-10-26',end:'2026-11-01'});assert.deepEqual(rangeFor('month','2024-02-29'),{start:'2024-02-01',end:'2024-02-29'});assert.equal(shiftAnchor('month','2026-01-31',1),'2026-02-01');assert.equal(validDate('2026-02-30'),false);assert.equal(validDate('2024-02-29'),true);});
+test('daily cash flow keeps empty and balanced dates distinct in a week crossing months',()=>{
+  const income={date:'2024-02-29',type:'income',amount:29};
+  const expense={date:'2024-02-29',type:'expense',amount:29};
+  const nextMonth={date:'2024-03-01',type:'expense',amount:90};
+  const outside={date:'2024-03-04',type:'income',amount:10000};
+  const days=dailyCashFlow([nextMonth,expense,outside,income],rangeFor('week',income.date));
+  assert.deepEqual([...days.keys()],['2024-02-26','2024-02-27','2024-02-28','2024-02-29','2024-03-01','2024-03-02','2024-03-03']);
+  assert.deepEqual(days.get(income.date),{income:29,expense:29,records:[expense,income]});
+  assert.deepEqual(days.get(nextMonth.date),{income:0,expense:90,records:[nextMonth]});
+  assert.deepEqual(days.get('2024-03-02'),{income:0,expense:0,records:[]});
+  assert.equal(days.has(outside.date),false);
+});
 test('WeChat detail recognizes date, expense, merchant, category',()=>{const result=parseBillText('微信支付\n账单详情\n瑞幸咖啡\n-14.90\n支付成功\n商品说明 瑞幸咖啡\n支付时间 2026年10月31日 08:30:00\n支付方式 零钱',{reference:'2026-11-01'});assert.equal(result.rows.length,1);assert.deepEqual({...result.rows[0],id:'x'},{id:'x',merchant:'瑞幸咖啡',amount:1490,date:'2026-10-31',type:'expense',source:'wechat',category:'food',note:'截图导入',needsReview:false,dateInferred:false});});
 test('Alipay list tracks full-date headings and preserves income',()=>{const result=parseBillText('支付宝\n2026年10月31日\n盒马鲜生 -86.30\n地铁出行 -6.00\n2026年10月30日\n工资 +8500.00',{reference:'2026-11-01'});assert.equal(result.rows.length,3);assert.equal(result.rows[1].date,'2026-10-31');assert.equal(result.rows[2].date,'2026-10-30');assert.equal(result.rows[2].type,'income');assert.equal(result.rows[2].category,'salary');assert.equal(result.source,'alipay');});
 test('separate-line merchant with date headings',()=>{const r=parseBillText('微信\n2026年10月31日\n瑞幸咖啡\n-14.90\n地铁出行\n-6.00',{reference:'2026-11-01'});assert.equal(r.rows.length,2);assert.equal(r.rows[0].merchant,'瑞幸咖啡');assert.equal(r.rows[1].category,'transport');});

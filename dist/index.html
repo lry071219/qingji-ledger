@@ -4,6 +4,6 @@
 <meta name="description" content="轻记：截图导入，按周和月查看收支，账单保存在本机。">
 <link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./assets/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="./assets/icon-192.png">
 <link rel="stylesheet" href="./styles.css"><link rel="stylesheet" href="./compact.css"><link rel="stylesheet" href="./minimal.css"><title>轻记 · 账单</title></head>
-<body><div class="workspace"><header class="app-header"><span class="app-name">轻记</span><span class="local-label"><span data-icon="lock"></span>本地账本</span></header><main id="main"></main></div>
-<nav class="mobile-nav" aria-label="主操作"><a href="#bills" data-page="bills" aria-current="page"><span data-icon="receipt"></span>账单</a><button data-action="import" class="mobile-import"><span class="nav-import-glyph" data-icon="scan"></span><span>导入</span></button><button data-action="settings"><span data-icon="settings"></span>设置</button></nav>
+<body><div class="workspace"><header class="app-header"><span class="app-name">轻记</span><button type="button" class="header-settings" data-action="settings"><span data-icon="settings"></span>设置</button></header><main id="main"></main></div>
+<nav class="mobile-nav" aria-label="主操作"><a href="#bills" data-page="bills" aria-current="page"><span data-icon="receipt"></span>账单</a><button data-action="import" class="mobile-import"><span class="nav-import-glyph" data-icon="scan"></span><span>导入</span></button><a href="#statistics" data-page="statistics"><span data-icon="chart"></span>统计</a></nav>
 <dialog id="modal"><div id="modal-content"></div></dialog><div id="toast" role="status" aria-live="polite"></div><script type="module" src="./app.js"></script></body></html>

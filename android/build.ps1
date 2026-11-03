@@ -117,7 +117,7 @@ try {
   }
   $downloadRoot = Join-Path $projectRoot 'dist/downloads'
   New-Item -ItemType Directory -Force -Path $downloadRoot | Out-Null
-  $apk = Join-Path $downloadRoot 'qingji-1.5.0-arm64.apk'
+  $apk = Join-Path $downloadRoot 'qingji-1.6.0-arm64.apk'
   Invoke-Checked $java @('-jar',(Join-Path $ToolsRoot "$buildTools/lib/apksigner.jar"),'sign','--ks',$keystore,'--ks-key-alias','qingji','--ks-pass','env:QINGJI_SIGNING_PASSWORD','--key-pass','env:QINGJI_SIGNING_PASSWORD','--v1-signing-enabled','true','--v2-signing-enabled','true','--v3-signing-enabled','true','--v4-signing-enabled','false','--out',$apk,$aligned)
 } finally {Remove-Item Env:QINGJI_SIGNING_PASSWORD -ErrorAction SilentlyContinue}
 Invoke-Checked $java @('-jar',(Join-Path $ToolsRoot "$buildTools/lib/apksigner.jar"),'verify','--verbose','--print-certs',$apk)
@@ -148,7 +148,7 @@ try {
   }
 } finally {$archive.Dispose()}
 $checksum = (Get-FileHash -LiteralPath $apk -Algorithm SHA256).Hash.ToLowerInvariant()
-"$checksum  qingji-1.5.0-arm64.apk" | Set-Content -LiteralPath (Join-Path $downloadRoot 'qingji-1.5.0-arm64.apk.sha256') -Encoding utf8
-@{version='1.5.0';versionCode=6;packageId='com.qingji.ledger';minAndroid='7.0';minSdk=24;targetSdk=37;compileSdk=37;buildTools=$buildTools;architecture='arm64-v8a';supportsArm64=$true;nativeLibraries=$nativeLibraries.Count;ocrEngine='mlkit-chinese-bundled';networkPermission=$false;channel='release-candidate';publicationReady=$false;pending=@('developer identity','support email','physical device acceptance');size=(Get-Item -LiteralPath $apk).Length;sha256=$checksum;builtAt=[DateTimeOffset]::UtcNow.ToString('o')} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $downloadRoot 'release.json') -Encoding utf8
+"$checksum  qingji-1.6.0-arm64.apk" | Set-Content -LiteralPath (Join-Path $downloadRoot 'qingji-1.6.0-arm64.apk.sha256') -Encoding utf8
+@{version='1.6.0';versionCode=7;packageId='com.qingji.ledger';minAndroid='7.0';minSdk=24;targetSdk=37;compileSdk=37;buildTools=$buildTools;architecture='arm64-v8a';supportsArm64=$true;nativeLibraries=$nativeLibraries.Count;ocrEngine='mlkit-chinese-bundled';networkPermission=$false;channel='release-candidate';publicationReady=$false;pending=@('developer identity','support email','physical device acceptance');size=(Get-Item -LiteralPath $apk).Length;sha256=$checksum;builtAt=[DateTimeOffset]::UtcNow.ToString('o')} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $downloadRoot 'release.json') -Encoding utf8
 Write-Output "APK ready: $apk"
 Write-Output "SHA-256: $checksum"

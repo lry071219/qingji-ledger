@@ -1,4 +1,4 @@
-轻记 Android 1.5.0 — Native OCR dependency notices
+轻记 Android 1.6.0 — Native OCR dependency notices
 
 Google ML Kit Chinese 16.0.1 is a bundled on-device SDK, not an open source OCR engine.
 ML Kit terms: https://developers.google.com/ml-kit/terms
